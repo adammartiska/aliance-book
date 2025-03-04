@@ -1,13 +1,21 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ScreenContent } from 'components/ScreenContent';
-import { StatusBar } from 'expo-status-bar';
-
 import './global.css';
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60 * 1, // 1 hour
+    },
+  },
+});
 
 export default function App() {
   return (
     <>
-      <ScreenContent title="Home" path="App.tsx" />
-      <StatusBar style="auto" />
+      <QueryClientProvider client={queryClient}>
+        <ScreenContent title="Home" path="App.tsx" />
+      </QueryClientProvider>
     </>
   );
 }
