@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { type ErrorBoundaryProps } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { FlatList } from 'react-native';
+import { Button, FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDebounce } from 'use-debounce';
 
@@ -11,6 +12,16 @@ import SearchBar from '../components/search-bar';
 import { StarWarsCharacterDto } from '../types/star-wars-character.dto';
 import { STAR_WARS_CHARACTERS_QUERY_KEY } from '../utils/constants';
 
+// ErrorBoundary just to showcase how would I implement it everywhere in the app, this is as simple as I could do it
+export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
+  return (
+    <View className="flex-1 items-center justify-center bg-red-100">
+      <Text className="font-bold">{error.message}</Text>
+      <Button onPress={retry} title="Try again?" color="red" />
+    </View>
+  );
+}
+
 type ScreenContentProps = {
   title: string;
   path: string;
@@ -20,15 +31,12 @@ type ScreenContentProps = {
 const AppIndex = ({ title, path }: ScreenContentProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearchQuery] = useDebounce(searchQuery, 250);
-
   const {
     data: { pages = [] } = {},
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-    isError,
-    error,
     refetch,
   } = useInfiniteQuery({
     queryKey: [STAR_WARS_CHARACTERS_QUERY_KEY, debouncedSearchQuery],
@@ -40,7 +48,6 @@ const AppIndex = ({ title, path }: ScreenContentProps) => {
       return pages.length + 1;
     },
     initialPageParam: 1,
-    retry: false,
   });
 
   const characters = useMemo(() => {
@@ -57,11 +64,15 @@ const AppIndex = ({ title, path }: ScreenContentProps) => {
 
   return (
     <SafeAreaView
-      className="flex-1 items-center justify-center bg-white px-2"
+      className="flex-1 items-center justify-center  px-2"
       edges={['left', 'right', 'bottom']}>
       <SearchBar searchText={searchQuery} onSearch={setSearchQuery} />
       <FlatList
-        ListEmptyComponent={<NoDataFound label="There are no characters found" />}
+        ListEmptyComponent={
+          !isLoading || !isFetchingNextPage ? (
+            <NoDataFound label="There are no characters found" />
+          ) : null
+        }
         data={characters}
         // counting on "url" as unique entry
         keyExtractor={(character) => character?.url}
