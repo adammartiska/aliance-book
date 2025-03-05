@@ -4,7 +4,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { StarWarsCharacterDto } from '../types/star-wars-character.dto';
-import { extractIdFromUrl } from '../utils/utils';
+import { extractIdFromUrl, getCharacterAvatarUri } from '../utils/utils';
 
 export type CharacterCardProps = {
   character: StarWarsCharacterDto;
@@ -13,7 +13,6 @@ export type CharacterCardProps = {
 export const CharacterCard = ({ character }: CharacterCardProps) => {
   const { name, gender, height, birth_year, url } = character;
   const characterId = extractIdFromUrl(url);
-  const avatarUrl = `https://vieraboschkova.github.io/swapi-gallery/static/assets/img/people/${characterId}.jpg`;
 
   return (
     <Link asChild href={`/character/${characterId}`}>
@@ -26,9 +25,9 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
             className="absolute left-0 right-0 top-0 h-full w-full">
             <View className="flex-row items-center p-4">
               <Image
-                source={{ uri: avatarUrl }}
+                source={{ uri: getCharacterAvatarUri(url) }}
                 className="mr-4 h-20 w-20 rounded-full border-2 border-white"
-                // defaultSource={require('../assets/placeholder.png')}
+                defaultSource={require('../assets/placeholder.png')}
               />
               <View className="flex-1 justify-center">
                 <Text className="mb-1 text-xl font-bold text-white">{name}</Text>

@@ -9,7 +9,7 @@ import DetailMultiRow from '../../components/detail-multi-row';
 import { DetailRow } from '../../components/detail-row';
 import { NoDataFound } from '../../components/no-data-found';
 import { CHARACTER_DETAIL_QUERY_KEY } from '../../utils/constants';
-import { extractIdFromUrl } from '../../utils/utils';
+import { getCharacterAvatarUri } from '../../utils/utils';
 
 export default function CharacterDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -51,9 +51,6 @@ export default function CharacterDetailScreen() {
     edited,
   } = character;
 
-  const characterId = extractIdFromUrl(url);
-  const avatarUrl = `https://vieraboschkova.github.io/swapi-gallery/static/assets/img/people/${characterId}.jpg`;
-
   return (
     <ScrollView className="bg-gray-00 flex-1">
       <LinearGradient
@@ -63,9 +60,10 @@ export default function CharacterDetailScreen() {
         className="absolute left-0 right-0 top-0 h-full w-full">
         <View className="items-center p-4">
           <Image
-            source={{ uri: avatarUrl }}
+            source={{ uri: getCharacterAvatarUri(url) }}
             className="mb-4 h-40 w-40 rounded-full"
             resizeMode="cover"
+            defaultSource={require('../assets/placeholder.png')}
           />
 
           <Text className="mb-4 text-3xl font-bold text-white">{name}</Text>

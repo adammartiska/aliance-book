@@ -1,3 +1,5 @@
+import { IMAGES_BASE_URL } from './constants';
+
 export function extractIdFromUrl(url: string): number {
   // Remove any trailing slash
   const cleanUrl = url.replace(/\/$/, '');
@@ -10,4 +12,10 @@ export function extractIdFromUrl(url: string): number {
   const id = parseInt(lastSegment, 10);
 
   return id;
+}
+
+export function getCharacterAvatarUri(url: string): string {
+  const characterId = extractIdFromUrl(url);
+  const avatarUrl = `${IMAGES_BASE_URL}/${characterId}.jpg`;
+  return avatarUrl;
 }
