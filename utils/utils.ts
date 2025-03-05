@@ -1,4 +1,4 @@
-export function extractIdFromUrl(url: string): number | null {
+export function extractIdFromUrl(url: string): number {
   // Remove any trailing slash
   const cleanUrl = url.replace(/\/$/, '');
 
@@ -9,5 +9,5 @@ export function extractIdFromUrl(url: string): number | null {
   // Convert to number, return null if not a valid number
   const id = parseInt(lastSegment, 10);
 
-  return isNaN(id) ? null : id;
+  return id;
 }

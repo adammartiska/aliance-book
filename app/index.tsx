@@ -5,18 +5,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDebounce } from 'use-debounce';
 
 import { getCharacters } from '../api/star-wars-api';
-import { CharacterCard } from '../components/character-list-item';
+import { CharacterCard } from '../components/character-card';
 import { NoDataFound } from '../components/no-data-found';
 import SearchBar from '../components/search-bar';
 import { StarWarsCharacterDto } from '../types/star-wars-character.dto';
+import { STAR_WARS_CHARACTERS_QUERY_KEY } from '../utils/constants';
 
 type ScreenContentProps = {
   title: string;
   path: string;
   children?: React.ReactNode;
 };
-
-export const STAR_WARS_CHARACTERS_QUERY_KEY = 'STAR_WARS_CHARACTERS';
 
 const AppIndex = ({ title, path }: ScreenContentProps) => {
   const [searchQuery, setSearchQuery] = useState('');
