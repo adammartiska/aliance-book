@@ -5,7 +5,7 @@ This is simple project displaying Star Wars characters from free Star Wars API (
 visualguide.com/assets/img/characters/{id}.jpg but it didn't work. So I have found one github repository that stores these images and used that (https://vieraboschkova.github.io/swapi-gallery/static/assets/img/people/${characterId}.jpg)
 The only sensible filtering I have found only for search, the API documentation doesn't provide information on any other filters I can use on the API.
 
-I have developed and tested this application on iPhone 16 Pro, however I tried testing it today on Android and I couldn't get to display character cards (some problem with LinearGradient component)
+I have developed and tested this application on iPhone 16 Pro.
 
 ## Available Scripts
 

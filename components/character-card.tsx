@@ -22,8 +22,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
           <LinearGradient
             colors={['#42275a', '#734b6d']}
             start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            className="absolute left-0 right-0 top-0 h-full w-full">
+            end={{ x: 1, y: 0 }}>
             <View className="flex-row items-center p-4">
               <Image
                 source={{ uri: getCharacterAvatarUri(url) }}

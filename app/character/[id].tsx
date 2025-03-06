@@ -54,11 +54,7 @@ export default function CharacterDetailScreen() {
 
   return (
     <ScrollView className="bg-gray-00 flex-1">
-      <LinearGradient
-        colors={['#42275a', '#734b6d']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0 }}
-        className="absolute left-0 right-0 top-0 h-full w-full">
+      <LinearGradient colors={['#42275a', '#734b6d']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }}>
         <View className="items-center p-4">
           <Image
             source={{ uri: getCharacterAvatarUri(url) }}
