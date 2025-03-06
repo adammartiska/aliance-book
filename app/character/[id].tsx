@@ -5,6 +5,7 @@ import React from 'react';
 import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 
 import { getCharacterById } from '../../api/star-wars-api';
+import placeholderImage from '../../assets/placeholder.png';
 import DetailMultiRow from '../../components/detail-multi-row';
 import { DetailRow } from '../../components/detail-row';
 import { NoDataFound } from '../../components/no-data-found';
@@ -63,7 +64,7 @@ export default function CharacterDetailScreen() {
             source={{ uri: getCharacterAvatarUri(url) }}
             className="mb-4 h-40 w-40 rounded-full"
             resizeMode="cover"
-            defaultSource={require('../assets/placeholder.png')}
+            defaultSource={placeholderImage}
           />
 
           <Text className="mb-4 text-3xl font-bold text-white">{name}</Text>

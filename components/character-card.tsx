@@ -3,6 +3,7 @@ import { Link } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
+import placeholderImage from '../assets/placeholder.png';
 import { StarWarsCharacterDto } from '../types/star-wars-character.dto';
 import { extractIdFromUrl, getCharacterAvatarUri } from '../utils/utils';
 
@@ -27,7 +28,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
               <Image
                 source={{ uri: getCharacterAvatarUri(url) }}
                 className="mr-4 h-20 w-20 rounded-full border-2 border-white"
-                defaultSource={require('../assets/placeholder.png')}
+                defaultSource={placeholderImage}
               />
               <View className="flex-1 justify-center">
                 <Text className="mb-1 text-xl font-bold text-white">{name}</Text>
